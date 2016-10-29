@@ -13,6 +13,8 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
+import os
+
 # Load dataset
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
 names = ['sepal-lenght', 'sepal-width', 'petal-length', 'petal-width', 'class']
@@ -111,19 +113,35 @@ def evaluate_algorithms():
     # ax.set_xticklabels(names)
     # plt.show()
 
+    d = [7.5,1.4,1.8,1.1]
     # Make predictions on validation dataset
-    knn = KNeighborsClassifier()
+    knn = SVC()
     knn.fit(X_train, Y_train)
     # predictions = knn.predict(X_validation)
-    predictions = knn.predict([1.5,1.4,1.8,1.1])
+    predictions = knn.predict(d)
     print(predictions)
     # print(accuracy_score(Y_validation, predictions))
     # print(confusion_matrix(Y_validation, predictions))
     # print(classification_report(Y_validation, predictions))
 
+    lr = LogisticRegression()
+    lr.fit(X_train, Y_train)
+    p_lr = lr.predict(d)
+    print(p_lr)
+
+    lda = LinearDiscriminantAnalysis()
+    lda.fit(X_train, Y_train)
+    p_lda = lda.predict(d)
+    print(p_lda)
+
+    lr = KNeighborsClassifier()
+    lr.fit(X_train, Y_train)
+    p_lr = lr.predict(d)
+    print(p_lr)
+
 def main():
     # shape()
-    select(150)
+    # select(150)
     # summary()
     # groupby('class')
 
@@ -131,7 +149,9 @@ def main():
     # histograms()
     # scatter()
 
-    evaluate_algorithms()
+    # evaluate_algorithms()
+
+    # os.rename("/Users/hendrix/.zshrc", "/Users/hendrix/.zshrc_BK")
 
 
 if __name__ == "__main__":
